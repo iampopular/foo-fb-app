@@ -1,0 +1,11 @@
+{
+    "env": {
+        "name": "developement"
+    },
+    "logging": {
+        "console": true
+    },
+    "apiServer": {
+        "baseURL": "https://nodejs-fb-app.herokuapp.com/"
+    }
+}
