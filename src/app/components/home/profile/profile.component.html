@@ -1,0 +1,17 @@
+<div class="card">
+    <div *ngIf="isImageLoaded">
+        
+        <label for="file-input">
+            <img class="card-img-top" [src]="imageToShow" alt="Card image cap">
+        </label>
+        <input type="file" name="picture" id="file-input" (change)="onProfilePhotoUpload($event)" accept="image/*" hidden />
+    </div>
+    <div class="card-body">
+        <h5 class="card-title">{{activeUserObject.firstName}} {{activeUserObject.lastName}}</h5>
+        <p class="card-text" *ngIf="activeUserObject.city"><span class="fa fa-map-marker-alt"></span>&nbsp;{{activeUserObject.city}}</p>
+    </div>
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{noOfConnections}} Connections</li>
+        <li class="list-group-item">{{noOfPosts}} Posts</li>
+    </ul>
+</div>

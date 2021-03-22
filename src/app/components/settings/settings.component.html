@@ -1,0 +1,231 @@
+<div class="row">
+    <div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
+        <app-profile></app-profile>
+    </div>
+    <div class="col-lg-9 col-md-9 col-sm-8 col-xs-12">
+        <div class="row" *ngIf="isLoading">
+            <div class="col-12">
+                <div class="progress">
+                    <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+                        style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                </div>
+                <hr>
+            </div>
+        </div>
+        <div class="row" *ngIf="!isLoading">
+            <div class="col-12">
+                <ul ngbNav #nav="ngbNav" class="nav-tabs">
+                    <li ngbNavItem>
+                        <a ngbNavLink>Profile</a>
+                        <ng-template ngbNavContent>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form class="form-signin" [formGroup]="profileForm"
+                                                (submit)="profileForm.valid && onSubmit()">
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="firstName">First Name</label>
+                                                            <input type="text" class="form-control"
+                                                                [formControl]="firstName" placeholder="First name">
+                                                            <span class="text-danger"
+                                                                *ngIf="firstName.dirty && firstName.invalid && firstName.hasError('required')">First
+                                                                name
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="lastName">Last Name</label>
+                                                            <input type="text" class="form-control"
+                                                                [formControl]="lastName" placeholder="Last name">
+                                                            <span class="text-danger"
+                                                                *ngIf="lastName.dirty && lastName.invalid && lastName.hasError('required')">Last
+                                                                name
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="dob">Date Of Birth</label>
+                                                            <input type="date" class="form-control" [formControl]="dob">
+                                                            <span class="text-danger"
+                                                                *ngIf="dob.dirty && dob.invalid">Date of birth
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="email">Email</label>
+                                                            <input type="text" class="form-control"
+                                                                [formControl]="email" placeholder="Email">
+                                                            <span class="text-danger"
+                                                                *ngIf="email.dirty && email.invalid && email.hasError('required')">Email
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="gender">Gender</label>
+                                                            <select class="form-control" [formControl]="gender">
+                                                                <option value="">--Select--</option>
+                                                                <option *ngFor="let gender of genders" [value]="gender">
+                                                                    {{ gender }}
+                                                                </option>
+                                                            </select>
+                                                            <span class="text-danger"
+                                                                *ngIf="gender.dirty && gender.invalid && gender.hasError('required')">Gender
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="phone">Phone</label>
+                                                            <input type="text" class="form-control"
+                                                                [formControl]="phone" placeholder="phone">
+                                                            <span class="text-danger"
+                                                                *ngIf="firstName.dirty && firstName.invalid && firstName.hasError('required')">First
+                                                                name
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="country">Country</label>
+                                                            <select class="form-control" [formControl]="country">
+                                                                <option value="">--Select--</option>
+                                                                <option *ngFor="let country of countries"
+                                                                    [value]="country">{{ country }}
+                                                                </option>
+                                                            </select>
+                                                            <span class="text-danger"
+                                                                *ngIf="country.dirty && country.invalid && country.hasError('required')">Country
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="state">State</label>
+                                                            <select class="form-control" [formControl]="state">
+                                                                <option value="">--Select--</option>
+                                                                <option *ngFor="let state of states" [value]="state">{{
+                                                                    state }}</option>
+                                                            </select>
+                                                            <span class="text-danger"
+                                                                *ngIf="state.dirty && state.invalid && state.hasError('required')">State
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="city">City</label>
+                                                            <select class="form-control" [formControl]="city">
+                                                                <option value="">--Select--</option>
+                                                                <option *ngFor="let city of cities" [value]="city">{{
+                                                                    city }}</option>
+                                                            </select>
+                                                            <span class="text-danger"
+                                                                *ngIf="city.dirty && city.invalid && city.hasError('required')">City
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="pincode">Pincode</label>
+                                                            <input type="text" class="form-control"
+                                                                [formControl]="pincode" placeholder="Pincode">
+                                                            <span class="text-danger"
+                                                                *ngIf="pincode.dirty && pincode.invalid && pincode.hasError('required')">Pincode
+                                                                name
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-6">
+                                                        <div class="form-group">
+                                                            <label for="profession">Profession</label>
+                                                            <input type="text" class="form-control"
+                                                                [formControl]="profession" placeholder="Profession">
+                                                            <span class="text-danger"
+                                                                *ngIf="profession.dirty && profession.invalid && profession.hasError('required')">Profession
+                                                                required.</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6">
+
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-12">
+                                                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                                                            [disabled]="!profileForm.valid">Save</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </li>
+                    <li ngbNavItem>
+                        <a ngbNavLink>Change Password</a>
+                        <ng-template ngbNavContent>
+                            <div class="row">
+                                <div class="col-12">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <form class="form-signin" [formGroup]="cPForm"
+                                                (submit)="cPForm.valid && onCPSubmit()">
+                                                <div class="form-group">
+                                                    <label for="password">New Password</label>
+                                                    <input type="password" class="form-control" [formControl]="password"
+                                                        placeholder="Password">
+                                                    <span class="text-danger"
+                                                        *ngIf="password.dirty && password.invalid && password.hasError('required')">Password
+                                                        required.</span>
+                                                    <span class="text-danger"
+                                                        *ngIf="password.dirty && password.invalid && password.hasError('minlength')">Invalid
+                                                        password.</span>
+                                                </div>
+
+                                                <div class="form-group">
+                                                    <label for="password">Confirm Password</label>
+                                                    <input type="password" class="form-control"
+                                                        [formControl]="confirmPassword" placeholder="Confirm password">
+                                                    <span class="text-danger"
+                                                        *ngIf="confirmPassword.dirty && confirmPassword.invalid && confirmPassword.hasError('required')">Confirm
+                                                        password
+                                                        required.</span>
+                                                    <span class="text-danger"
+                                                        *ngIf="confirmPassword.dirty && confirmPassword.invalid && confirmPassword.hasError('minlength')">Invalid
+                                                        confirm password.</span>
+                                                </div>
+
+                                                <button class="btn btn-lg btn-primary btn-block" type="submit"
+                                                    [disabled]="!cPForm.valid">Sign&nbsp;Up</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ng-template>
+                    </li>
+                </ul>
+                <div [ngbNavOutlet]="nav"></div>
+            </div>
+
+        </div>
+    </div>
+</div>

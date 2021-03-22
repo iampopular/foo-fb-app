@@ -1,0 +1,124 @@
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <form [formGroup]="postCreateForm" (submit)="postCreateForm.valid && onSubmit();">
+                    <div class="row">
+                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-12">
+                            <div class="form-group">
+                                <textarea class="form-control" rows="3" [formControl]="post"></textarea>
+                                <small id="post" class="form-text text-muted">Have anything to share .....</small>
+                                <span class="text-danger" *ngIf="!postCreateValid && post.hasError('required')">Post
+                                    required.</span>
+                            </div>
+                        </div>
+                        <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                            <div class="form-group">
+                                <label for="image-input"><i class="fa fa-camera fa-3x"></i></label>
+                                <input type="file" class="image-upload" id="image-input" accept="image/*" hidden
+                                    [formControl]="postImage" (change)="onFileChange($event)" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-12">
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary"
+                                [disabled]="!postCreateForm.valid">Submit</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<div class="row" *ngIf="noPosts">
+    <div class="col-12">
+        <div class="card border-info mb-3">
+            <div class="card-body text-info">
+                <h5 class="card-title">Info!!!</h5>
+                <p class="card-text">You do not have any post! Post something...</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<div class="row" *ngIf="isLoading">
+    <div class="col-12">
+        <div class="progress">
+            <div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar"
+                style="width: 100%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+        </div>
+        <hr>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="row" *ngFor="let post of posts">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-2">
+                                <img src="{{post.userIcon}}" class="rounded-circle" alt="Cinque Terre" height="80px"
+                                    width="80px">
+                            </div>
+                            <div class="col-9">
+                                <h5>{{ post.userName }}</h5>
+                                <h6>{{ post.profession }}</h6>
+                            </div>
+                            <div class="col-1">
+                                <div></div>
+                                <button type="button" class="btn btn-outline-secondary" placement="top"
+                                    ngbTooltip="Hide&nbsp;Post" *ngIf="activeUserObject.isAdmin==true"
+                                    (click)="onHidePostClick(post)">
+                                    <i class="fa fa-eye-slash"></i>
+                                </button>
+                                <button type="button" class="btn btn-outline-secondary" placement="top"
+                                    ngbTooltip="Hide&nbsp;Post"
+                                    *ngIf="activeUserObject.isAdmin==false && post.isMyPost==true"
+                                    (click)="onHidePostClick(post)">
+                                    <i class="fa fa-eye-slash"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <br>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-12 text-left">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div>{{ post.post }}</div>
+                                    </div>
+                                    <div class="col-12">
+                                        <img src="{{post.postImage}}" class="img-fluid">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-12 text-right">
+                                <div class="row mt-2">
+                                    <div class="col-12">
+                                        <span><i class="fa fa-clock"></i> {{post.postTimer}} ago</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 text-center">
+        <div class="btn-group" role="group" aria-label="Basic example">
+            <a routerLink="/dashboard" [queryParams]="{page:previousPage}" class="btn btn-primary">Previous</a>
+            <a routerLink="/dashboard" [queryParams]="{page:nextPage}" class="btn btn-primary">Next</a>
+        </div>
+    </div>
+</div>

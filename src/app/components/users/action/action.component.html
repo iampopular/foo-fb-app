@@ -1,0 +1,2 @@
+<button type="button" class="btn btn-sm btn-success" *ngIf="isActive" (click)=onDisableUserClick(user);>Active</button>
+<button type="button" class="btn btn-sm btn-danger" *ngIf="!isActive" (click)=onEnableUserClick(user);>Blocked</button>

@@ -1,0 +1,86 @@
+<div *ngIf="( isNewForm | async); then newForm else formSubmitted"></div>
+<ng-template #newForm>
+    <div class="row">
+        <div class="col-lg-6 offset-lg-3 col-md-6 offset-md-3 col-sm-6 offset-sm-3 col-xs-12">
+            <div class="card">
+                <div class="card-header text-center">
+                    Registration
+                </div>
+                <div class="card-body">
+                    <form class="form-signin" [formGroup]="signUpForm" (submit)="signUpForm.valid && onSubmit()">
+                        <div class="form-group">
+                            <label for="firstName">First Name</label>
+                            <input type="text" class="form-control" [formControl]="firstName" placeholder="First name">
+                            <span class="text-danger"
+                                *ngIf="firstName.dirty && firstName.invalid && firstName.hasError('required')">First
+                                name
+                                required.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="lastName">Last Name</label>
+                            <input type="text" class="form-control" [formControl]="lastName" placeholder="Last name">
+                            <span class="text-danger"
+                                *ngIf="lastName.dirty && lastName.invalid && lastName.hasError('required')">Last name
+                                required.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">Date Of Birth</label>
+                            <input type="date" class="form-control" [formControl]="dob">
+                            <span class="text-danger" *ngIf="dob.dirty && dob.invalid">Date of birth
+                                required.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="dob">Gender</label>
+                            <select class="form-control" [formControl]="gender">
+                                <option value="">--Select--</option>
+                                <option *ngFor="let gender of genders" [value]="gender">{{ gender }}</option>
+                            </select>
+                            <span class="text-danger"
+                                *ngIf="gender.dirty && gender.invalid && gender.hasError('required')">Gender
+                                required.</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" class="form-control" [formControl]="email" placeholder="Email">
+                            <span class="text-danger"
+                                *ngIf="email.dirty && email.invalid && email.hasError('required')">Email
+                                required.</span>
+                            <span class="text-danger"
+                                *ngIf="email.dirty && email.invalid && email.hasError('email')">Invalid
+                                email</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Password</label>
+                            <input type="password" class="form-control" [formControl]="password" placeholder="Password">
+                            <span class="text-danger"
+                                *ngIf="password.dirty && password.invalid && password.hasError('required')">Password
+                                required.</span>
+                            <span class="text-danger"
+                                *ngIf="password.dirty && password.invalid && password.hasError('minlength')">Invalid
+                                password.</span>
+                        </div>
+
+                        <button class="btn btn-lg btn-primary btn-block" type="submit"
+                            [disabled]="!signUpForm.valid">Sign
+                            Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</ng-template>
+<ng-template #formSubmitted>
+    <div class="row">
+        <div class="col-12">
+            <div class="jumbotron">
+                <h1>Registration</h1>
+                <p class="lead">You have been registered successfully. Please login to your account.</p>
+            </div>
+        </div>
+    </div>
+</ng-template>
